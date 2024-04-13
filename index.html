@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>VLC Wasm Example</title>
+    </head>
+    <body>
+        <div>
+            <canvas id="canvas" style="background-color:gray;"></canvas>
+            <div>
+                <button id="play">Play</button>
+                <button id="pause">Stop</button>
+                <meter id="seekbar" max="100" style="width: 500px" value="0"></meter>
+                <meter id="volume" max="100" style="width: 100px" value="80"></meter>
+            </div>
+        </div>
+
+        <script src="./lib/vlc/experimental.js"></script>
+        <script type="module">
+            import { VLCPlayer } from "./lib/vlc/vlc.js";
+
+            let video = {
+                source: "/path/to/video.mkv"
+                options:"--codec=webcodec --aout=emworklet_audio -vv --input-repeat=10000",
+                size: { 
+                    width: "700px", 
+                    height: "" 
+                },
+            };
+
+            window.onload = async function () {
+                await VLCPlayer(video);
+            };
+        </script>
+    </body>
+</html>
